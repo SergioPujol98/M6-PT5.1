@@ -20,7 +20,9 @@ import org.w3c.dom.Element;
 public class Parte2 implements Serializable {
 	public static void main(String[] args) throws IOException {
 		File archivo = new File("myPeople.dat");
+		File contadr = new File ("myPeopleContador.dat");
 		Scanner n1 = new Scanner(archivo);
+		Scanner n2 = new Scanner(contadr);
 
 		try {
 
@@ -39,8 +41,15 @@ public class Parte2 implements Serializable {
 			Attr attr = doc.createAttribute("Nombre");
 			attr.setValue("DAM");
 			departamento.setAttributeNode(attr);
-
-			for (int i = 0; i < 4; i++) {
+			int  contador = 0;
+			while (n2.hasNext()) {
+				n2.next();
+				n2.next();
+				n2.next();
+			contador ++;
+			}
+			
+			for (int i = 0; i < contador; i++) {
 				Element persona = doc.createElement("Persona");
 				rootElement.appendChild(persona);
 
@@ -65,11 +74,11 @@ public class Parte2 implements Serializable {
 
 			StreamResult consoleResult = new StreamResult(System.out);
 			transformer.transform(source, consoleResult);
-
+			
 		} catch (Exception ex) {
 			System.out.println("Error: " + ex.getMessage());
 		}
-
+	
 	}
 
 }
